@@ -3,7 +3,8 @@
 #include <cstdlib>
 
 Snake::Snake(): 
-  direction_(static_cast<Direction>(rand() % 4))
+  direction_(static_cast<Direction>(rand() % 4)),
+  lastMove_(direction_)
 {
   blocks_.push_back(std::pair<int, int>
 		    (Field::WIDTH / 2,
@@ -12,6 +13,7 @@ Snake::Snake():
 
 bool Snake::tick(Field &field)
 {
+  lastMove_ = direction_;
   std::pair<int, int> p = blocks_.front();
   switch (direction_)
   {
@@ -50,7 +52,7 @@ bool Snake::tick(Field &field)
     field.setBlock(Field::SNAKE_BLOCK, p.first, p.second);
     field.newFruit();
   }
-  if (blocks_.size() >= Field::WIDTH * Field::HEIGHT)
+  if (blocks_.size() >= Field::WIDTH * Field::HEIGHT - 1)
     return false;
   return true;    
 }
@@ -62,19 +64,19 @@ void Snake::keyEvent(Direction d)
   switch (d)
   {
   case LEFT:
-    if (direction_ == RIGHT)
+    if (lastMove_ == RIGHT)
       return;
     break;
   case UP:
-    if (direction_ == DOWN)
+    if (lastMove_ == DOWN)
       return;
     break;
   case RIGHT:
-    if (direction_ == LEFT)
+    if (lastMove_ == LEFT)
       return;
     break;
   case DOWN:
-    if (direction_ == UP)
+    if (lastMove_ == UP)
       return;
     break;
   }

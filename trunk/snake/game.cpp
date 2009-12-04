@@ -19,5 +19,4 @@ void Game::draw(Painter &p) const
 void Game::keyEvent(Snake::Direction d)
 {
   snake_.keyEvent(d);
-  tick();
 }
