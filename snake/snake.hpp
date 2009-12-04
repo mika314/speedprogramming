@@ -14,4 +14,5 @@ private:
   typedef std::list<std::pair<int, int> > Blocks;
   Blocks blocks_;
   Direction direction_;
+  Direction lastMove_;
 };
