@@ -6,6 +6,7 @@ class Tetromino;
 class Well
 {
 public:
+  enum { WIDTH = 10, HEIGHT = 20 };
   Well();
   // рисует колодец на рисовальщике Painter
   void draw(Painter &) const;
@@ -17,5 +18,5 @@ public:
   // удаление полностью заполненых строки
   int removeSolidLines();
 private:
-  bool map_[20][10];
+  bool map_[HEIGHT][WIDTH];
 };

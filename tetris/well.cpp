@@ -4,16 +4,16 @@
 
 Well::Well()
 {
-  for (int y = 0; y < 20; ++y)
-    for (int x = 0; x < 20; ++x)
+  for (int y = 0; y < HEIGHT; ++y)
+    for (int x = 0; x < WIDTH; ++x)
       map_[y][x] = false;
 }
 
 void Well::draw(Painter &p) const
 {
   p.setColor(Painter::WHITE);
-  for (int y = 0; y < 20; ++y)
-    for (int x = 0; x < 10; ++x)
+  for (int y = 0; y < HEIGHT; ++y)
+    for (int x = 0; x < WIDTH; ++x)
       if (map_[y][x])
 	p.rect(x * 8 + 1, y * 8 + 1,
 	       (x + 1) * 8 - 1, (y + 1) * 8 - 1);
@@ -31,9 +31,9 @@ bool Well::isCollision(const Tetromino &t) const
 	int wx = x + t.x();
 	int wy = y + t.y();
 	if (wx < 0 ||
-	    wx >= 10 ||
+	    wx >= WIDTH ||
 	    wy < 0 ||
-	    wy >= 20)
+	    wy >= HEIGHT)
 	  return true;
 	if (map_[wy][wx])
 	  return true;
@@ -49,9 +49,9 @@ void Well::unite(const Tetromino &t)
       int wx = x + t.x();
       int wy = y + t.y();
       if (wx >= 0 &&
-	  wx < 10 &&
+	  wx < WIDTH &&
 	  wy >= 0 &&
-	  wy < 20)
+	  wy < HEIGHT)
 	map_[wy][wx] = map_[wy][wx] || t.map(x, y);
     }
 }
@@ -59,10 +59,10 @@ void Well::unite(const Tetromino &t)
 int Well::removeSolidLines()
 {
   int res = 0;
-  for (int y = 0; y < 20; ++y)
+  for (int y = 0; y < HEIGHT; ++y)
   {
     bool solid = true;
-    for (int x = 0; x < 10; ++x)
+    for (int x = 0; x < WIDTH; ++x)
       if (!map_[y][x])
       {
 	solid = false;
@@ -72,10 +72,10 @@ int Well::removeSolidLines()
     {
       ++res;
       for (int yy = y - 1; yy >= 0; --yy)
-	for (int x = 0; x < 10; ++x)
+	for (int x = 0; x < WIDTH; ++x)
 	  map_[yy + 1][x] = map_[yy][x];
     }
-    for (int x = 0; x < 10; ++x)
+    for (int x = 0; x < WIDTH; ++x)
       map_[0][x] = false;
   }
   return res;
