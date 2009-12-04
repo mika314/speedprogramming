@@ -36,9 +36,9 @@ bool Tetromino::map(int x, int y) const
       " 88 "
       "    ", 
 
-      " 88 " // O
+      "    " // O
       " 88 "
-      "    "
+      " 88 "
       "    ", 
 
       "  8 " // S
@@ -46,9 +46,9 @@ bool Tetromino::map(int x, int y) const
       " 8  "
       "    ", 
 
-      "  8 " // Z
+      " 8  " // Z
       " 88 "
-      " 8  "
+      "  8 "
       "    ", 
 
       "    " // T
