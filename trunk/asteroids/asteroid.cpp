@@ -3,7 +3,7 @@
 #include "painter.hpp"
 #include <cstdlib>
 
-Asteroid::Asteroid(): angel_(rand() % 31400 / 1000.0f) {}
+Asteroid::Asteroid(): angel_(rand() % 3140 / 1000.0f) {}
 
 void Asteroid::tick(Vector acel)
 {
@@ -19,10 +19,10 @@ void Asteroid::tick(Vector acel)
         x += Game::WIDTH;
     if (y < -Game::HEIGHT / 2)
         y += Game::HEIGHT;
-    angel_ += 3.0f * Game::DELTA_T / 1000.0f;
+    angel_ += 1.0f * Game::DELTA_T / 1000.0f;
 }
 
 void Asteroid::draw(Painter &p) const
 {
-    p.drawAsteroid(x, y, size, angel_);
+    p.drawAsteroid(x, y, size, angel_ * 180 / 3.14);
 }
