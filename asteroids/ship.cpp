@@ -1,5 +1,6 @@
 #include "ship.hpp"
 #include "painter.hpp"
+#define _USE_MATH_DEFINES
 #include <cmath>
 #include "game.hpp"
 

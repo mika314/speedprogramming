@@ -19,7 +19,7 @@ class Game
     void reset();
 public:
     enum { 
-        DELTA_T = 10,
+        DELTA_T = 1000 / 100,
         WIDTH = 854,
         HEIGHT = 480
     };

@@ -68,15 +68,18 @@ void upSpaceEvent(unsigned char key, int, int)
 void timer(int = 0)
 {
     static int t = 0;
-    int ct = glutGet(GLUT_ELAPSED_TIME);
-    if (t == 0)
-        t = ct;
-    game.tick(keys);
-    display();
-    t += Game::DELTA_T;
-    int d = t - ct;
-    if (d < 0)
-        d = 1;
+    int d;
+    do
+    {
+        int ct = glutGet(GLUT_ELAPSED_TIME);
+        if (t == 0)
+            t = ct;
+        game.tick(keys);
+        t += Game::DELTA_T;
+        d = t - ct;
+        if (d > 0)
+            display();
+    } while (d <= 0);
     glutTimerFunc(d, timer, 0);
 }
 

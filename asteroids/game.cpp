@@ -74,9 +74,9 @@ void Game::tick(Keys keys)
             float d = sqrt((b -> x - (*a) -> x) * (b -> x - (*a) -> x) + (b -> y - (*a) -> y) * (b -> y - (*a) -> y));
             if (d < ((*a) -> size + 1.5))
             {
-                if ((*a) -> size > 2)
+                if ((*a) -> size > 8)
                 {
-                    (*a) -> size /= 2;
+                    (*a) -> size /= 1.414;
                     Asteroid *aa = new Asteroid(**a);
                     aa -> vx += rand() % 20 - 20;
                     aa -> vy += rand() % 20 - 20;
@@ -84,8 +84,8 @@ void Game::tick(Keys keys)
                 }
                 else
                 {
-                    asteroids_.erase(a);
                     delete *a;
+                    asteroids_.erase(*a);
                     if (asteroids_.size() == 0)
                     {
                         ++level_;
