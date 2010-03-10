@@ -1,5 +1,6 @@
 #include <GL/glut.h>
 #include "painter.hpp"
+#define _USE_MATH_DEFINES
 #include <cmath>
 
 void Painter::drawAsteroid(float x, float y, float size, float angle)
