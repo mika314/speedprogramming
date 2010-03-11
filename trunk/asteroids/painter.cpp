@@ -59,3 +59,14 @@ void Painter::drawBullet(float x, float y)
     glPointSize(1);
     glPopMatrix();
 }
+
+void Painter::drawStar(float x, float y)
+{
+    glPushMatrix();
+    glTranslatef(x, y, 0);
+    glColor3f(1, 1, 1);
+    glBegin(GL_POINTS);
+    glVertex2f(0, 0);
+    glEnd();
+    glPopMatrix();
+}

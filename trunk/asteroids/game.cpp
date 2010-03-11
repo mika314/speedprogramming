@@ -15,6 +15,14 @@ Game::~Game()
 
 void Game::reset()
 {
+    stars_.clear();
+    for (int i = 0; i < 100; ++i)
+    {
+        Star a;
+        a.x = rand() % WIDTH - WIDTH / 2;
+        a.y = rand() % HEIGHT - HEIGHT / 2;
+        stars_.push_back(a);
+    }
     bullets_.clear();
     for (Asteroids::iterator i = asteroids_.begin(); i != asteroids_.end(); ++i)
         delete *i;
@@ -25,8 +33,8 @@ void Game::reset()
         a -> size = 64;
         a -> x = rand() % WIDTH - WIDTH / 2;
         a -> y = rand() % HEIGHT - HEIGHT / 2;
-        a -> vx = rand() % 40 - 20;
-        a -> vy = rand() % 40 - 20;
+        a -> vx = rand() % 31 - 15;
+        a -> vy = rand() % 31 - 15;
         asteroids_.insert(a);
     }
 }
@@ -34,6 +42,8 @@ void Game::reset()
 void Game::draw(Painter &p) const
 {
     ship_.draw(p);
+    for (Stars::const_iterator i = stars_.begin(); i != stars_.end(); ++i)
+        i -> draw(p);
     for (Bullets::const_iterator i = bullets_.begin(); i != bullets_.end(); ++i)
         i -> draw(p);
     for (Asteroids::const_iterator i = asteroids_.begin(); i != asteroids_.end(); ++i)
@@ -66,6 +76,8 @@ void Game::tick(Keys keys)
     }
     for (Bullets::iterator i = bullets_.begin(); i != bullets_.end(); ++i)
         i -> tick(v);
+    for (Stars::iterator i = stars_.begin(); i != stars_.end(); ++i)
+        i -> tick(v);
     for (Asteroids::const_iterator i = asteroids_.begin(); i != asteroids_.end(); ++i)
         (*i) -> tick(v);
     for (Asteroids::const_iterator a = asteroids_.begin(); a != asteroids_.end(); ++a)
@@ -78,8 +90,8 @@ void Game::tick(Keys keys)
                 {
                     (*a) -> size /= 1.414;
                     Asteroid *aa = new Asteroid(**a);
-                    aa -> vx += rand() % 20 - 20;
-                    aa -> vy += rand() % 20 - 20;
+                    aa -> vx += rand() % 31 - 15;
+                    aa -> vy += rand() % 31 - 15;
                     asteroids_.insert(aa);
                 }
                 else

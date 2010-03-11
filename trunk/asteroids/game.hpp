@@ -3,8 +3,10 @@
 #include "ship.hpp"
 #include "bullet.hpp"
 #include "asteroid.hpp"
+#include "star.hpp"
 #include <deque>
 #include <set>
+#include <vector>
 
 class Painter;
 
@@ -15,6 +17,8 @@ class Game
     Bullets bullets_;
     typedef std::set<Asteroid *> Asteroids;
     Asteroids asteroids_;
+    typedef std::vector<Star> Stars;
+    Stars stars_;
     int level_;
     void reset();
 public:
