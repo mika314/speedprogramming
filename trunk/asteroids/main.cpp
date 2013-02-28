@@ -75,7 +75,7 @@ void timer(int = 0)
         if (t == 0)
             t = ct;
         game.tick(keys);
-        t += Game::DELTA_T;
+        t += Game::DELTA_T * 1 / 2;
         d = t - ct;
         if (d > 0)
             display();
